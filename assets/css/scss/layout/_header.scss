@@ -1,0 +1,91 @@
+// Header
+header {
+    position: fixed;
+    z-index: 900;
+    top: 0;
+    width: 100%;
+    height: auto;
+    background: white;
+    border-bottom: 2px solid $bc-primary;
+    nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin: 20px auto;
+        ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            li {
+                display: flex;
+                align-items: center;
+                height: 50px;
+                padding: 0 20px;
+                border-left: 1px solid $bc-secondary;
+                &:last-child {
+                    border-right: 0px solid $bc-secondary;
+                }
+                a {
+                    color: $body-color;
+                    text-decoration: none;
+                    transition: $transition;
+                    &:hover {
+                        color: $bc-primary;
+                        transition: $transition;
+                    }
+                }
+            }
+        }
+    }
+    .event-host {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 100%;
+        .logo-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            padding: 0 50px 0 0;
+            border-right: 1px solid $border-light;
+            img {
+                height: 80px;
+            }
+        }
+        .host-infos {
+            padding: 0 0 0 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            .site-title {
+                font-size: 35px;
+                line-height: 45px;
+                color: $bc-primary;
+                font-weight: bold;
+                text-align: left;
+            }
+            .site-subtitle {
+                font-size: 20px;
+                line-height: 27px;
+                font-weight: 400;
+            }
+
+        }
+    }
+    .header-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        height: $header-height;
+    }
+}

@@ -1,0 +1,42 @@
+{# {% if websiteData.websiteConfig.event.isLongerThanOneDay == false %} #}
+    
+    {% if websiteData.websiteConfig.event and websiteData.websiteConfig.event.programmes|length > 0 %}
+
+        {% for chapter in websiteData.websiteConfig.event.chapters %}
+        <div class="pseudo-wrapper">
+            <div class="h4-wrapper">
+                <h4 class=""><span>{{chapter.name}}</span></h4>
+                <div class="after-h4"></div>
+            </div>
+            {% for programme in chapter.programmes %}
+                <div class="programme-wrapper">
+                    <div class="info-wrapper">
+                        {% if programme.image %}
+                        <div class="programme-img-wrapper">
+                            <img src="{{ vich_uploader_asset(programme, 'imageFile') }}">
+                        </div>
+                        {% endif %}
+                        <div class="content">
+                            <h5 class="">{{ programme.name }}</h5>
+                            {{ programme.description|raw }}
+                        </div>
+                    </div>
+                    {% if programme.dateStart and programme.dateEnd %}
+                    <div class="date-wrapper">
+                        <span class="conf-date-start">
+                            {{ programme.dateStart ? programme.dateStart|date('H:i') : '' }}
+                        </span>
+                        <span>-</span>
+                        <span class="conf-date-end">
+                            {{ programme.dateEnd ? programme.dateEnd|date('H:i') : '' }}
+                        </span>
+                    </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        
+    {% endif %}
+
+{# {% endif %} #}
