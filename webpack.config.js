@@ -24,8 +24,10 @@ Encore
     .addEntry('mainJS', './assets/js/main.js')
     .addEntry('mainWS', './assets/js/main-websocket.js')
     .addEntry('dashboard', './assets/app-dashboard.js')
-    .addEntry('dashboardJS', './assets/js/main-dashboard.js')
     .addEntry('dashboardWS', './assets/js/dashboard-websocket.js')
+
+    // React entries
+    .addEntry('reactMain', './assets/js/react.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')

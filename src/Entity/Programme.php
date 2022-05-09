@@ -2,14 +2,28 @@
 
 namespace App\Entity;
 
-use App\Repository\ProgrammeRepository;
-use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ProgrammeRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=ProgrammeRepository::class)
  * @Vich\Uploadable
+ * @ApiResource(
+ *      normalizationContext={
+ *          "groups"={
+ *              "read:programme",
+ *              "read:chapter",
+ *              "read:event",
+ *              "read:config"
+ *          }
+ *      },
+ *      collectionOperations={"get"},
+ *      itemOperations={"get"}
+ * )
  */
 class Programme
 {
@@ -17,6 +31,12 @@ class Programme
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({
+     *      "read:programme",
+     *      "read:chapter",
+     *      "read:event",
+     *      "read:config"
+     * })
      */
     private $id;
 
@@ -28,36 +48,70 @@ class Programme
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({
+     *      "read:programme",
+     *      "read:chapter",
+     *      "read:event",
+     *      "read:config"
+     * })
      */
     private $name;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({
+     *      "read:programme",
+     *      "read:chapter",
+     *      "read:event",
+     *      "read:config"
+     * })
      */
     private $position = 0;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({
+     *      "read:programme",
+     *      "read:chapter",
+     *      "read:event",
+     *      "read:config"
+     * })
      */
     private $blockWidth = 4;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({
+     *      "read:programme",
+     *      "read:chapter"
+     * })
      */
     private $description;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({
+     *      "read:programme",
+     *      "read:chapter"
+     * })
      */
     private $dateStart;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({
+     *      "read:programme",
+     *      "read:chapter"
+     * })
      */
     private $dateEnd;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({
+     *      "read:programme",
+     *      "read:chapter"
+     * })
      */
     private $image;
 
@@ -77,6 +131,15 @@ class Programme
      * @ORM\ManyToOne(targetEntity=Chapter::class, inversedBy="programmes")
      */
     private $chapter;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @Groups({
+     *      "read:programme",
+     *      "read:chapter"
+     * })
+     */
+    private $type;
 
     public function __toString(){
         return (string) $this->name;
@@ -209,6 +272,18 @@ class Programme
     public function setChapter(?Chapter $chapter): self
     {
         $this->chapter = $chapter;
+
+        return $this;
+    }
+
+    public function getType(): ?int
+    {
+        return $this->type;
+    }
+
+    public function setType(int $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }

@@ -2,13 +2,26 @@
 
 namespace App\Entity;
 
-use App\Repository\EventRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\EventRepository;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=EventRepository::class)
+ * @ApiResource(
+ *      normalizationContext={
+ *          "groups"={
+ *              "read:event",
+ *              "read:chapter",
+ *              "read:config"
+ *          }
+ *      },
+ *      collectionOperations={"get"},
+ *      itemOperations={"get"}
+ * )
  */
 class Event
 {
@@ -16,57 +29,68 @@ class Event
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"read:event", "read:config","read:chapter"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:event", "read:config","read:chapter"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"read:event", "read:config","read:chapter"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"read:event", "read:config","read:chapter"})
      */
     private $dateStart;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"read:event", "read:config","read:chapter"})
      */
     private $dateEnd;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"read:event", "read:config","read:chapter"})
      */
     private $active;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"read:event", "read:config","read:chapter"})
      */
     private $public;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"read:event", "read:config","read:chapter"})
      */
     private $status = -1;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"read:event", "read:config","read:chapter"})
      */
     private $type = 0;
 
     /**
      * @ORM\OneToMany(targetEntity=Programme::class, mappedBy="event", orphanRemoval=true)
+     * @Groups({"read:event"})
      */
     private $programmes;
 
     /**
      * @ORM\OneToMany(targetEntity=Video::class, mappedBy="event")
      * @ORM\OrderBy({"position" = "ASC"})
+     * @Groups({"read:event", "read:config","read:chapter"})
      */
     private $videos;
 
@@ -77,21 +101,25 @@ class Event
 
     /**
      * @ORM\OneToMany(targetEntity=Chapter::class, mappedBy="event")
+     * @Groups({"read:event", "read:config"})
      */
     private $chapters;
 
     /**
      * @ORM\OneToMany(targetEntity=Periode::class, mappedBy="event", orphanRemoval=true)
+     * @Groups({"read:event", "read:config","read:chapter"})
      */
     private $periodes;
 
     /**
      * @ORM\OneToMany(targetEntity=EventDate::class, mappedBy="event", orphanRemoval=true)
+     * @Groups({"read:event", "read:config","read:chapter"})
      */
     private $eventDates;
 
     /**
      * @ORM\OneToMany(targetEntity=Contest::class, mappedBy="event", orphanRemoval=true)
+     * @Groups({"read:event", "read:config","read:chapter"})
      */
     private $contests;
 

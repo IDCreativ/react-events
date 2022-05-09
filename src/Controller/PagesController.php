@@ -64,27 +64,37 @@ class PagesController extends AbstractController
         $this->pollVoteRepository = $pollVoteRepository;
     }
     
+    // /**
+    //  * @Route("/", name="home")
+    //  */
+    // public function index()
+    // {
+    //     if (!$this->getUser() && $this->generalConfigurationRepository->findLast()->getEvent() != null) {
+    //         $this->addFlash('info', 'Vous devez être connecté pour accéder à cette page.');
+    //         return $this->redirectToRoute('app_inscription');
+    //     }
+
+    //     return $this->render('pages/index.html.twig', [
+    //         'controller_name'   => 'Accueil',
+    //         'programmes'        => $this->programmeRepository->findBy(['event' => $this->generalConfigurationRepository->findLast()->getEvent()], ['dateStart' => 'asc']),
+    //         'modulesArray'      => $this->generalConfigurationRepository->findLast() ? $this->generalConfigurationRepository->findLast()->getModules() : [],
+    //         'polls'             => $this->pollRepository->findAll(),
+    //         'questions'         => $this->questionRepository->findBy([], ['id'=>'asc']),
+    //         'events'            => $this->eventRepository->findBy([], ['id'=>'desc']),
+    //         'video'             => $this->generalConfigurationRepository->findLast() != null ? $this->videoRepository->findOneByEvent($this->generalConfigurationRepository->findLast()->getEvent()) : "",
+    //         'replays'           => $this->videoRepository->findByType(2),
+    //         'categories'        => $this->categoryRepository->findAll(),
+    //         'partners'          => $this->partnersRepository->findAll()
+    //     ]);
+    // }
+    
     /**
      * @Route("/", name="home")
      */
     public function index()
     {
-        if (!$this->getUser() && $this->generalConfigurationRepository->findLast()->getEvent() != null) {
-            $this->addFlash('info', 'Vous devez être connecté pour accéder à cette page.');
-            return $this->redirectToRoute('app_inscription');
-        }
-
-        return $this->render('pages/index.html.twig', [
-            'controller_name'   => 'Accueil',
-            'programmes'        => $this->programmeRepository->findBy(['event' => $this->generalConfigurationRepository->findLast()->getEvent()], ['dateStart' => 'asc']),
-            'modulesArray'      => $this->generalConfigurationRepository->findLast() ? $this->generalConfigurationRepository->findLast()->getModules() : [],
-            'polls'             => $this->pollRepository->findAll(),
-            'questions'         => $this->questionRepository->findBy([], ['id'=>'asc']),
-            'events'            => $this->eventRepository->findBy([], ['id'=>'desc']),
-            'video'             => $this->generalConfigurationRepository->findLast() != null ? $this->videoRepository->findOneByEvent($this->generalConfigurationRepository->findLast()->getEvent()) : "",
-            'replays'           => $this->videoRepository->findByType(2),
-            'categories'        => $this->categoryRepository->findAll(),
-            'partners'          => $this->partnersRepository->findAll()
+        return $this->render('pages/index-react.html.twig', [
+            'controller_name'   => 'Accueil'
         ]);
     }
 

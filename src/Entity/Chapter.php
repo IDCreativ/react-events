@@ -2,13 +2,29 @@
 
 namespace App\Entity;
 
-use App\Repository\ChapterRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ChapterRepository;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ChapterRepository::class)
+ * @ApiResource(
+ *      normalizationContext={
+ *          "groups"={
+ *              "read:chapter",
+ *              "read:event",
+ *              "read:config"
+ *          }
+ *      },
+ *      collectionOperations={"get"},
+ *      itemOperations={"get"},
+ *      attributes={
+ *          "order"={"id":"asc"}
+ *      },
+ * )
  */
 class Chapter
 {
@@ -16,28 +32,39 @@ class Chapter
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"read:chapter", "read:event", "read:config"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:chapter", "read:event", "read:config"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"read:chapter", "read:event", "read:config"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"read:chapter", "read:event", "read:config"})
      */
     private $dateStart;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"read:chapter", "read:event", "read:config"})
      */
     private $dateEnd;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @Groups({"read:chapter", "read:event", "read:config"})
+     */
+    private $showTime;
 
     /**
      * @ORM\ManyToOne(targetEntity=Event::class, inversedBy="chapters")
@@ -47,6 +74,7 @@ class Chapter
 
     /**
      * @ORM\OneToMany(targetEntity=Programme::class, mappedBy="chapter")
+     * @Groups({"read:chapter", "read:event", "read:config"})
      */
     private $programmes;
 
@@ -150,6 +178,18 @@ class Chapter
                 $programme->setChapter(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getShowTime(): ?bool
+    {
+        return $this->showTime;
+    }
+
+    public function setShowTime(bool $showTime): self
+    {
+        $this->showTime = $showTime;
 
         return $this;
     }

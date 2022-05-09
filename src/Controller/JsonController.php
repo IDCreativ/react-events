@@ -65,6 +65,21 @@ class JsonController extends AbstractController
     }
 
     /**
+     * @Route("/me", name="me", methods={"GET"})
+     */
+    public function me()
+    {
+        $user = $this->getUser();
+
+        return $this->json([
+            'id' => $user->getId(),
+            'email' => $user->getEmail(),
+            'firstname' => $user->getFirstname(),
+            'lastname' => $user->getLastname(),
+        ]);
+    }
+
+    /**
      * @Route("/send-question", name="send_question")
      */
     public function send_question(Request $request): Response

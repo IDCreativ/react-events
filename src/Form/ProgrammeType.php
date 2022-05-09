@@ -25,6 +25,14 @@ class ProgrammeType extends AbstractType
                 'label' => 'Nom du programme'
             ])
             ->add('position')
+            ->add('type', ChoiceType::class, [
+                'label' => 'Type de bloc',
+                'choices' => [
+                    'Défaut (Texte + image)'    => 0,
+                    'Texte + image'   => 0,
+                    'Image seule'   => 1,
+                ]
+            ])
             ->add('blockWidth', ChoiceType::class, [
                 'label' => 'Taille du bloc',
                 'choices' => [
@@ -36,7 +44,8 @@ class ProgrammeType extends AbstractType
                 ]
             ])
             ->add('description', CKEditorType::class, [
-                'label' => 'Description'
+                'label' => 'Description',
+                'required' => false,
             ])
             ->add('imageFile', VichImageType::class, [
                 'required' => false,

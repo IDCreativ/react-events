@@ -3,19 +3,38 @@
 namespace App\Entity;
 
 use DateTimeInterface;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
 use App\Repository\GeneralConfigurationRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Entity\File as EmbeddedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @ORM\Entity(repositoryClass=GeneralConfigurationRepository::class)
  * @Vich\Uploadable
+ * @ApiResource(
+ *      normalizationContext={
+ *          "groups"={
+ *              "read:event",
+ *              "read:chapter",
+ *              "read:config",
+ *              "read:programme"
+ *          }
+ *      },
+ *      collectionOperations={"get"},
+ *      itemOperations={"get"},
+ *      attributes={
+ *          "pagination_enabled"=false,
+ *          "pagination_items_per_page"=1,
+ *          "order"={"id":"desc"}
+ *      },
+ * )
  */
 class GeneralConfiguration
 {
@@ -23,31 +42,37 @@ class GeneralConfiguration
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"read:event", "read:config","read:chapter"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"read:event", "read:config","read:chapter"})
      */
     private $siteType = 0;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:event", "read:config","read:chapter"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read:event", "read:config","read:chapter"})
      */
     private $tagline;
 
     /**
      * @ORM\OneToOne(targetEntity=Event::class, cascade={"persist", "remove"})
+     * @Groups({"read:event", "read:config","read:chapter"})
      */
     private $event;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read:event", "read:config","read:chapter"})
      */
     private $logo;
 
@@ -65,46 +90,55 @@ class GeneralConfiguration
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read:event", "read:config","read:chapter"})
      */
     private $linkedin;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read:event", "read:config","read:chapter"})
      */
     private $facebook;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read:event", "read:config","read:chapter"})
      */
     private $instagram;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read:event", "read:config","read:chapter"})
      */
     private $twitter;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read:event", "read:config","read:chapter"})
      */
     private $youtube;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read:event", "read:config","read:chapter"})
      */
     private $website;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"read:event", "read:config","read:chapter"})
      */
     private $copyright;
 
     /**
      * @ORM\OneToMany(targetEntity=Module::class, cascade={"persist", "remove"}, mappedBy="generalConfiguration")
+     * @Groups({"read:event", "read:config","read:chapter"})
      */
     private $modules;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"read:event", "read:config","read:chapter"})
      */
     private $googleAnalytics;
 
