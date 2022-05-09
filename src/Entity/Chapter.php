@@ -22,7 +22,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      collectionOperations={"get"},
  *      itemOperations={"get"},
  *      attributes={
- *          "order"={"id":"asc"}
+ *          "order"={"dateStart":"asc"}
  *      },
  * )
  */

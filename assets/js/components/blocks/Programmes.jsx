@@ -5,8 +5,6 @@ import "moment-timezone";
 
 const Programmes = (props) => {
 
-	moment.locale('fr');
-
 	const [chapters, setChapters] = useState([]);
 
 	const fetchChapters = async () => {
@@ -22,6 +20,7 @@ const Programmes = (props) => {
 		fetchChapters();
 	}, []);
 
+	moment.locale('fr');
 	const formatDate = (str) => moment.utc(str).format("H:mm");
 
 	return (

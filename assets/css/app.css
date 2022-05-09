@@ -11531,46 +11531,6 @@ ul.cgu {
   width: 100%;
   overflow: hidden;
 }
-.live-wrapper .live-container .waiting-block .countdown-container {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-.live-wrapper .live-container .waiting-block .countdown-container #countdown {
-  font-size: 30px;
-  line-height: 30px;
-  font-weight: 400;
-  text-transform: uppercase;
-  color: white;
-}
-.live-wrapper .live-container .waiting-block .countdown-container #countdown span {
-  font-size: 24px;
-  line-height: 30px;
-  font-weight: 300;
-  vertical-align: middle;
-}
-.live-wrapper .live-container .waiting-block .countdown-container h2, .live-wrapper .live-container .waiting-block .countdown-container .h2 {
-  position: relative;
-  z-index: 2;
-  font-size: 30px;
-  line-height: 36px;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: white;
-  margin: 0 auto 30px;
-  text-align: center;
-}
-.live-wrapper .live-container .waiting-block .countdown-container .car-ended {
-  font-size: 24px;
-  line-height: 30px;
-}
 .live-wrapper .live-container .waiting-block img {
   height: 100%;
   width: 100%;
@@ -11602,53 +11562,9 @@ ul.cgu {
   box-sizing: border-box;
 }
 
-@media screen and (min-width: 576px) {
-  .live-wrapper .live-container .waiting-block .countdown-container #countdown {
-    font-size: 30px;
-  }
-  .live-wrapper .live-container .waiting-block .countdown-container h2, .live-wrapper .live-container .waiting-block .countdown-container .h2 {
-    font-size: 24px;
-    line-height: 26px;
-    margin: 0 auto 30px;
-  }
-}
-@media screen and (min-width: 768px) {
-  .live-wrapper .live-container .waiting-block .countdown-container {
-    width: auto;
-  }
-  .live-wrapper .live-container .waiting-block .countdown-container #countdown {
-    font-size: 30px;
-  }
-  .live-wrapper .live-container .waiting-block .countdown-container h2, .live-wrapper .live-container .waiting-block .countdown-container .h2 {
-    font-size: 24px;
-    line-height: 26px;
-    margin: 0 auto 30px;
-  }
-}
 @media screen and (min-width: 992px) {
   .live-wrapper .live-container {
     flex-direction: row;
-  }
-  .live-wrapper .live-container .waiting-block .countdown-container #countdown {
-    font-size: 30px;
-  }
-  .live-wrapper .live-container .waiting-block .countdown-container h2, .live-wrapper .live-container .waiting-block .countdown-container .h2 {
-    font-size: 24px;
-    line-height: 26px;
-    margin: 0 auto 30px;
-  }
-}
-@media screen and (min-width: 1200px) {
-  .live-wrapper .live-container {
-    flex-direction: row;
-  }
-  .live-wrapper .live-container .waiting-block .countdown-container #countdown {
-    font-size: 30px;
-  }
-  .live-wrapper .live-container .waiting-block .countdown-container h2, .live-wrapper .live-container .waiting-block .countdown-container .h2 {
-    font-size: 24px;
-    line-height: 26px;
-    margin: 0 auto 30px;
   }
 }
 .replays {
@@ -12221,64 +12137,105 @@ label {
   margin: 0 auto 0;
 }
 
-.waiting-block .countdown-container {
+.countdown-container {
+  z-index: 2;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  padding: 20px 40px;
+  border-radius: 20px;
+  width: 90%;
 }
-.waiting-block .countdown-container #countdown {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+.countdown-container #countdown {
   font-size: 20px;
   font-weight: 300;
   text-transform: uppercase;
-  color: #00A0DD;
+  color: white;
 }
-.waiting-block .countdown-container #countdown div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 0 15px 0;
-  border-right: 2px solid #CECECE;
+.countdown-container #countdown span {
+  font-size: 20px;
 }
-.waiting-block .countdown-container #countdown div:last-child {
-  border-right: none;
-  padding: 0 0 0 15px;
-}
-.waiting-block .countdown-container #countdown div:first-child {
-  padding: 0 15px 0 0;
-}
-.waiting-block .countdown-container #countdown span {
-  font-size: 11px;
-  line-height: 14px;
-  padding: 0;
-  margin: 0;
-}
-.waiting-block .countdown-container #countdown span.chiffre {
-  font-size: 30px;
-  line-height: 36px;
-  font-weight: bold;
-}
-.waiting-block .countdown-container h2, .waiting-block .countdown-container .h2 {
+.countdown-container h2, .countdown-container .h2 {
   position: relative;
   z-index: 2;
-  font-size: 16px;
-  line-height: 26px;
+  font-size: 24px;
+  line-height: 30px;
   font-weight: 700;
   text-transform: uppercase;
-  margin: 0 auto 30px;
-  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+  margin: 0 auto 20px;
+  color: white;
+  text-align: center;
 }
-.waiting-block img {
-  height: 100%;
-  width: 100%;
-  -o-object-fit: contain;
-     object-fit: contain;
+.countdown-container h3, .countdown-container .h3 {
+  color: white;
+  text-align: center;
+}
+.countdown-container .car-ended {
+  font-size: 24px;
+  line-height: 30px;
+}
+
+@media screen and (min-width: 576px) {
+  .countdown-container #countdown {
+    font-size: 30px;
+  }
+  .countdown-container #countdown span {
+    font-size: 30px;
+    margin: 0 10px 0 2px;
+  }
+  .countdown-container #countdown span:last-child {
+    margin: 0;
+  }
+  .countdown-container h2, .countdown-container .h2 {
+    font-size: 24px;
+    margin: 0 auto 20px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .countdown-container {
+    width: auto;
+  }
+  .countdown-container #countdown {
+    font-size: 30px;
+  }
+  .countdown-container h2, .countdown-container .h2 {
+    font-size: 24px;
+    margin: 0 auto 20px;
+  }
+}
+@media screen and (min-width: 992px) {
+  .countdown-container #countdown {
+    font-size: 30px;
+  }
+  .countdown-container h2, .countdown-container .h2 {
+    font-size: 30px;
+    margin: 0 auto 20px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .countdown-container #countdown {
+    font-size: 30px;
+  }
+  .countdown-container h2, .countdown-container .h2 {
+    font-size: 30px;
+    margin: 0 auto 20px;
+  }
+}
+.show-counter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+.show-counter .countdown {
+  display: flex;
 }
 
 .poll {

@@ -7,7 +7,7 @@ function countdown(date) {
 	const Titre = document.getElementById("countdown-title");
 
 	var date1 = new Date();
-	var date2 = new Date("Mar 17, 2022 19:00:00");
+	var date2 = new Date(date);
 	// console.log(date1);
 	var sec = (date2 - date1) / 1000;
 	var n = 24 * 3600;
@@ -37,4 +37,6 @@ function countdown(date) {
 	}
 }
 
-export default countdown;
+export default {
+	countdown
+};

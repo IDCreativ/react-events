@@ -10,19 +10,19 @@ const HomePage = (props) => {
 	const asideToggle = useRef(null);
 	const [asideOpened, setAsideOpened] = useState(true);
 
-	const [generalConfiguration, setGeneralConfiguration] = useState([{}]);
+	const [event, setEvent] = useState([{}]);
 
-	const fetchConfiguration = async () => {
+	const fetchEvent = async () => {
 		try {
 			const dataConfig = await generalConfigurationAPI.findConfig();
-			setGeneralConfiguration(dataConfig);
+			setEvent(dataConfig.event);
 		} catch (error) {
 			console.log(error.response);
 		}
 	};
 
 	useEffect(() => {
-		fetchConfiguration();
+		fetchEvent();
 	}, []);
 
 	const handleAside = () => {
@@ -40,7 +40,10 @@ const HomePage = (props) => {
 				<main id="front">
 					<section className="live-wrapper">
 						<div id="js-live-container" className="live-container">
-							<VideoContainer />
+							<VideoContainer
+								eventName={event.name}
+								eventDateStart={event.dateStart}
+							/>
 						</div>
 					</section>
 				</main>

@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useRef } from "react";
+import moment from "moment";
+import "moment-timezone";
 
-const VideoContainer = (props) => {
+const VideoContainer = ({ eventName, eventDateStart }) => {
+	const countdownContainer = useRef(null);
+
+	moment.locale("fr");
+	const formatDate = (str) => moment.utc(str).format("DD MMMM YYYY");
+	const formatHour = (str) => moment.utc(str).format("H:mm");
+
 	return (
 		<div className="waiting-block">
-			<div
-				id="disclaimer"
-				className="alert alert-danger text-center"
-				role="alert"
-			>
-				De retour prochainement.
+			<div className="countdown-container glass">
+				<h2>{eventName}</h2>
+				<h3>
+					RDV le {formatDate(eventDateStart)} à {formatHour(eventDateStart)}
+				</h3>
 			</div>
 			<img src="img/waiting-bg.jpg" alt="" />
 		</div>
